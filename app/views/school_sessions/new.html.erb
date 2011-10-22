@@ -2,7 +2,7 @@
 
 <%= form_for @school_session, :html => {:class => ""} do |f| %>
   <fieldset>
-    <%= f.text_field :code %>
+    <%= f.text_field :code, :title => "School Code" %>
     <%= f.password_field :password %>
 
     <div class="input">

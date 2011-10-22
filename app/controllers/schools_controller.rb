@@ -1,4 +1,6 @@
 class SchoolsController < ApplicationController
+  skip_before_filter :require_login, :only => [:index]
+
   # GET /schools
   # GET /schools.json
   def index
