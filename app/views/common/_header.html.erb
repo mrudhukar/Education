@@ -3,7 +3,7 @@
     <div class="topbar-inner">
       <div class="container-fluid">
         <h3><%= link_to("Indian Schools", root_path) %></h3>
-        <% if current_user %>
+        <% if current_school %>
           <ul class="nav">
             <%= render_tab(TabConstants::HOME, root_path) %>
             <li class="dropdown <%= 'active' %>">
@@ -17,9 +17,9 @@
 
           <ul class="nav secondary-nav">
             <li class="dropdown">
-              <%= link_to(current_user.name, "#", :class => "dropdown-toggle") %>
+              <%= link_to(current_school.name, "#", :class => "dropdown-toggle") %>
               <ul class="dropdown-menu">
-                <li><%= link_to "Edit School Profile", edit_user_path(current_user) %></li>
+                <li><%= link_to "Edit School Profile", edit_school_path(current_school) %></li>
                 <li class="divider"></li>
                 <li><%= link_to "Logout", logout_path %></li>
               </ul>
@@ -27,7 +27,7 @@
           </ul>
         <% else %>
           <ul class="nav secondary-nav">
-            <%= render_tab(TabConstants::REGISTER, new_user_path) %>
+            <%= render_tab(TabConstants::REGISTER, new_school_path) %>
             <%= render_tab(TabConstants::LOGIN, login_path) %>
           </ul>
         <% end %>

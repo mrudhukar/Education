@@ -1,14 +1,14 @@
-class UserSessionsController < ApplicationController
+class SchoolSessionsController < ApplicationController
   skip_before_filter :require_login, :only => [:new, :create]
 
   def new
 #    @tab = TabConstants::LOGIN
-    @user_session = UserSession.new
+    @school_session = SchoolSession.new
   end
 
   def create
-    @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
+    @school_session = SchoolSession.new(params[:school_session])
+    if @school_session.save
       redirect_to session[:orginal_uri] || root_url
     else
       flash[:error] = "Login failed. Please try again"
@@ -17,8 +17,8 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    @user_session = UserSession.find
-    @user_session.destroy
+    @school_session = SchoolSession.find
+    @school_session.destroy
     redirect_to root_url
   end
 end

@@ -10,9 +10,9 @@ Education::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  resources :user_sessions#, :schools, :items
-  match 'login' => 'user_sessions#new', :as => :login
-  match 'logout' => 'user_sessions#destroy', :as => :logout
+  resources :school_sessions#, :schools, :items
+  match 'login' => 'school_sessions#new', :as => :login
+  match 'logout' => 'school_sessions#destroy', :as => :logout
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products

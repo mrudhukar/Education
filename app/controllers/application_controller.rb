@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def current_school_session
     return @current_school_session if defined?(@current_school_session)
-    @current_school_session = UserSession.find
+    @current_school_session = SchoolSession.find
   end
 
   def current_school
