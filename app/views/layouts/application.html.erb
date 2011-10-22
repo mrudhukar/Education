@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Education</title>
+  <title>Indian Schools</title>
   <%= stylesheet_link_tag    "application" %>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css"/>
+
   <%= javascript_include_tag "application" %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body style="padding-top: 40px">
+  <div class="container-fluid">
+    <%= render :partial => "common/header" %>
+    <div class="inner_content">
+      <%= render :partial => "common/inner_header" %>
+      <%= render_flash %>
 
-<%= yield %>
+      <%= yield %>
 
+      <div id="modal_popup_container"></div>
+    </div>
+  </div>
 </body>
 </html>

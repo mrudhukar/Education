@@ -1,0 +1,29 @@
+@mixin top-rounded-corners($radius) {
+  -moz-border-radius-topleft: $radius;
+  -moz-border-radius-topright: $radius;
+  border-top-right-radius:  $radius;
+  border-top-left-radius:  $radius;
+}
+
+@mixin bottom-rounded-corners($radius) {
+  -moz-border-radius-bottomleft: $radius;
+  -moz-border-radius-bottomright: $radius;
+  border-bottom-right-radius:  $radius;
+  border-bottom-left-radius:  $radius;
+}
+
+@mixin rounded-corners($radius) {
+  @include top-rounded-corners($radius);
+  @include bottom-rounded-corners($radius);
+}
+
+@mixin highlight-background{
+  background-color: #FFFF99;
+}
+
+@mixin right-aligned-button{
+  float: right;
+  a{
+    float: right;
+  }
+}

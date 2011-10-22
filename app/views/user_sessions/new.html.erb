@@ -1,0 +1,24 @@
+<% @title = "Login" %>
+<% @page_action = {:name => "Register", :url => new_user_path} %>
+
+<%= form_for @user_session, :html => {:class => ""} do |f| %>
+  <fieldset>
+    <%= f.text_field :email %>
+    <%= f.password_field :password %>
+
+    <div class="input">
+      <ul class="inputs-list">
+        <li>
+          <label>
+            <%= check_box_tag "user_session[remember_me]", @user_session.remember_me %> <span>Remember me</span>
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <%= f.actions do %>
+      <%= f.submit "Login" %>
+    <% end %>
+
+  </fieldset>
+<% end %>

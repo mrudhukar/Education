@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
+gem 'rake', '0.9.2'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'mysql2'
 
 
 # Gems used only for assets and not required
@@ -17,17 +18,23 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
-# Use unicorn as the web server
-# gem 'unicorn'
+gem 'client_side_validations'
 
 # Deploy with Capistrano
 # gem 'capistrano'
+gem 'authlogic'
+gem 'will_paginate', '~> 3.0.0'
 
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+group :development, :test do
+  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'therubyracer'
+end
 
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+end
+
+group :production do
+  gem 'pg'
 end
