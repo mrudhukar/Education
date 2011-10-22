@@ -1,0 +1,16 @@
+<% @title = "Listing Schools" %>
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @schools.each do |school| %>
+  <tr>
+    <td><%= link_to 'Show', school %></td>
+    <td><%= link_to 'Edit', edit_school_path(school) %></td>
+    <td><%= link_to 'Destroy', school, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>

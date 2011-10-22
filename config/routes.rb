@@ -10,7 +10,7 @@ Education::Application.routes.draw do
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  resources :school_sessions#, :schools, :items
+  resources :school_sessions, :schools#, :items
   match 'login' => 'school_sessions#new', :as => :login
   match 'logout' => 'school_sessions#destroy', :as => :logout
 
