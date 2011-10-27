@@ -11,48 +11,23 @@
     </div>
   <% end %>
 
-
-  <div class="clearfix">
-    <label for="xlInput3">Name</label>
-    <div class="input">
-      <div class="inline-inputs">
-          <div class="input-prepend">
-            <span class="add-on">First name</span>
-            <input class="medium" type="text" value="May 1, 2011"/>
-          </div>
-
-          <div class="input-prepend">
-            <span class="add-on">Surname</span>
-            <input class="medium" type="text" value="May 1, 2011"/>
-          </div>
-      </div>
-    </div>
-  </div>
-
-
-  <%= f.text_field :first_name %>
-  <%= f.text_field :surname %>
-  <%= f.date_select :dob, {:start_year => 1980 , :end_year => Time.now.year, :order => [:day, :month, :year], :use_short_month => true},
-    :title => "Date of Birth", :class => "mini" %>
+  <%= f.inline_inputs [f.text_field(:first_name, :basic => true, :class => "medium"), f.text_field(:surname, :basic => true, :class => "medium")], :prepend => ["First Name", "Surname"], :title => "Name" %>
+  <%= f.date_select :dob, {:start_year => 1980 , :end_year => Time.now.year, :order => [:day, :month, :year]},
+    :title => "Date of Birth", :class => "small" %>
   
   <%= f.select :gender, ProfileConstants::GENDER, {:prompt => 'Select..'}, :class => "small" %>
 
-  <%= f.text_field :father_first_name %>
-  <%= f.text_field :father_surname %>
-
-  <%= f.text_field :mother_first_name %>
-  <%= f.text_field :mother_surname %>
-
-  <%= f.text_field :gaurdian_first_name %>
-  <%= f.text_field :gaurdian_surname %>
+  <%= f.inline_inputs [f.text_field(:father_first_name, :basic => true, :class => "medium"), f.text_field(:father_surname, :basic => true, :class => "medium")], :prepend => ["First Name", "Surname"], :title => "Father's Name" %>
+  <%= f.inline_inputs [f.text_field(:mother_first_name, :basic => true, :class => "medium"), f.text_field(:mother_surname, :basic => true, :class => "medium")], :prepend => ["First Name", "Surname"], :title => "Mother's Name" %>
+  <%= f.inline_inputs [f.text_field(:gaurdian_first_name, :basic => true, :class => "medium"), f.text_field(:gaurdian_surname, :basic => true, :class => "medium")], :prepend => ["First Name", "Surname"], :title => "Gaurdian's Name" %>
 
   <%= f.select :caste, ProfileConstants::CASTE, {:prompt => 'Select..'}, :class => "small" %>
   <%= f.select :minority, ProfileConstants::MINORITY , {:prompt => 'Select..'}, :class => "small" %>
 
   <%= f.text_field :father_income_source %>
-  <%= f.text_field :father_number, :class => "medium" %>
-  <%= f.text_field :gaurdian_number, :class => "medium" %>
-  <%= f.select :bpl, [["Yes", 1],["No", 0]],:title => "Below Poverty Line", :class => "mini" %>
+  <%= f.text_field :father_number %>
+  <%= f.text_field :gaurdian_number %>
+  <%= f.select :bpl, [["Yes", 1],["No", 0]],:title => "Below Poverty Line", :class => "small" %>
   <%= f.text_field :aadhar_uid %>
 
   <%= f.text_area :current_address, :class => "xxlarge", :rows => 3 %>

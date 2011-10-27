@@ -9,9 +9,6 @@ class MyFormBuilder < ActionView::Helpers::FormBuilder
       options[:class] << " #{name}"
       options[:title] ||= field_name.to_s.humanize
 
-      title = get_title(object_name, field_name, options[:title], options.delete(:required)) unless options[:skip_title]
-      help_text = get_help_text(options[:help_text])
-
       if (name == "select")
         super_input = super(field_name, args[0], args[1] ||{}, options)
       elsif (name == "date_select")
@@ -20,7 +17,12 @@ class MyFormBuilder < ActionView::Helpers::FormBuilder
         super_input = super(field_name, options)
       end
 
+      return super_input if options[:basic]
+
       super_input = make_inputs_inline(super_input) if (name == "date_select")
+
+      title = get_title(object_name, field_name, options[:title], options.delete(:required)) unless options[:skip_title]
+      help_text = get_help_text(options[:help_text])
       get_final_wrappings(super_input, title, help_text)
     end
   end
@@ -44,6 +46,23 @@ class MyFormBuilder < ActionView::Helpers::FormBuilder
 
   def actions(&block)
     @template.content_tag(:div, @template.capture(&block), :class => "actions")
+  end
+
+  def inline_inputs(objects, *args)
+    options = args.extract_options!
+    title = get_title(nil, nil, options[:title], options.delete(:required)) unless options[:skip_title]
+    help_text = get_help_text(options[:help_text])
+
+    input = ""
+    objects.each_with_index do |obj, i|
+      if options[:prepend]
+        pend = @template.content_tag(:span, options[:prepend][i], :class => "add-on")
+        obj = @template.content_tag(:div, (pend + obj).html_safe, :class => "input-prepend")
+      end
+      input = (input+" "+obj).html_safe
+    end
+    super_input = make_inputs_inline(input.html_safe)
+    get_final_wrappings(super_input, title, help_text)
   end
 
   private

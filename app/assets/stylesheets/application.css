@@ -7,3 +7,7 @@
  *= require_tree .
  *= depend_on "layout"
 */
+
+.inline-inputs .input-prepend{
+  display: inline-block;
+}
