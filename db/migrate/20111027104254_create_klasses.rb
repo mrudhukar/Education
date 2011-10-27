@@ -3,6 +3,6 @@ class CreateKlasses < ActiveRecord::Migration
     create_table :klasses do |t|
       t.string :name, :null => false
     end
-    add_index :klass, :name
+    add_index :klasses, :name
   end
 end
