@@ -3,5 +3,5 @@ class SchoolKlass < ActiveRecord::Base
   belongs_to :school
 
   validates :klass, :presence => true
-  valdiates :school, :uniqueness => { :scope => :klass}, :presence => true
+  validates :school, :uniqueness => { :scope => :klass}, :presence => true
 end
