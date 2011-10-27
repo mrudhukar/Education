@@ -1,0 +1,66 @@
+<%= form_for(@student, :validate => true) do |f| %>
+  <% if @student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="clearfix">
+    <label for="xlInput3">Name</label>
+    <div class="input">
+      <div class="inline-inputs">
+          <div class="input-prepend">
+            <span class="add-on">First name</span>
+            <input class="medium" type="text" value="May 1, 2011"/>
+          </div>
+
+          <div class="input-prepend">
+            <span class="add-on">Surname</span>
+            <input class="medium" type="text" value="May 1, 2011"/>
+          </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%= f.text_field :first_name %>
+  <%= f.text_field :surname %>
+  <%= f.date_select :dob, {:start_year => 1980 , :end_year => Time.now.year, :order => [:day, :month, :year], :use_short_month => true},
+    :title => "Date of Birth", :class => "mini" %>
+  
+  <%= f.select :gender, ProfileConstants::GENDER, {:prompt => 'Select..'}, :class => "small" %>
+
+  <%= f.text_field :father_first_name %>
+  <%= f.text_field :father_surname %>
+
+  <%= f.text_field :mother_first_name %>
+  <%= f.text_field :mother_surname %>
+
+  <%= f.text_field :gaurdian_first_name %>
+  <%= f.text_field :gaurdian_surname %>
+
+  <%= f.select :caste, ProfileConstants::CASTE, {:prompt => 'Select..'}, :class => "small" %>
+  <%= f.select :minority, ProfileConstants::MINORITY , {:prompt => 'Select..'}, :class => "small" %>
+
+  <%= f.text_field :father_income_source %>
+  <%= f.text_field :father_number, :class => "medium" %>
+  <%= f.text_field :gaurdian_number, :class => "medium" %>
+  <%= f.select :bpl, [["Yes", 1],["No", 0]],:title => "Below Poverty Line", :class => "mini" %>
+  <%= f.text_field :aadhar_uid %>
+
+  <%= f.text_area :current_address, :class => "xxlarge", :rows => 3 %>
+  <%= f.text_area :permanent_address, :class => "xxlarge", :rows => 3 %>
+
+
+  <%= f.actions do %>
+    <%= f.submit "Submit" %>
+    <%= f.cancel_path "Cancel", schools_path %>
+  <% end %>
+<% end %>

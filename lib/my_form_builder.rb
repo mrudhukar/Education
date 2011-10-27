@@ -1,6 +1,6 @@
 class MyFormBuilder < ActionView::Helpers::FormBuilder
 
-  helpers = %w{text_field password_field text_area select}
+  helpers = %w{text_field password_field text_area select date_select}
 
   helpers.each do |name|
     define_method(name) do |field_name, *args|
@@ -9,30 +9,19 @@ class MyFormBuilder < ActionView::Helpers::FormBuilder
       options[:class] << " #{name}"
       options[:title] ||= field_name.to_s.humanize
 
-      field_id = "#{object_name}_#{field_name}"
+      title = get_title(object_name, field_name, options[:title], options.delete(:required)) unless options[:skip_title]
+      help_text = get_help_text(options[:help_text])
 
-      # Convert field ids of nested resources like user[professional_profile]_about_me
-      # to user_professional_profile_about_me by replacing [ and ] with _
-      #
-      field_id.gsub!(/[\[\]]/, '_')
-      field_id.gsub!(/_+/, '_')
-
-      title_text = options[:title]
-      title_text << " *" if options.delete(:required)
-
-      title = ""
-      title += label(field_id, title_text.html_safe, :for => field_id) unless options[:skip_title]
-
-      help_text = if options[:help_text]
-        @template.content_tag(:span, options[:help_text].html_safe, :class => "help-inline")
+      if (name == "select")
+        super_input = super(field_name, args[0], args[1] ||{}, options)
+      elsif (name == "date_select")
+        super_input = super(field_name, args[0] || {}, options)
       else
-        "".html_safe
+        super_input = super(field_name, options)
       end
 
-      super_input = (name == "select") ? super(field_name, args[0], args[1] ||{}, options) : super(field_name, options)
-      input = @template.content_tag(:div, super_input + help_text, :class => 'input')
-
-      @template.content_tag(:div, (title + input).html_safe, :class => 'clearfix')
+      super_input = make_inputs_inline(super_input) if (name == "date_select")
+      get_final_wrappings(super_input, title, help_text)
     end
   end
 
@@ -55,6 +44,39 @@ class MyFormBuilder < ActionView::Helpers::FormBuilder
 
   def actions(&block)
     @template.content_tag(:div, @template.capture(&block), :class => "actions")
+  end
+
+  private
+
+  def get_title(object_name, field_name, text, required)
+    field_id = "#{object_name}_#{field_name}"
+
+    # Convert field ids of nested resources like user[professional_profile]_about_me
+    # to user_professional_profile_about_me by replacing [ and ] with _
+    #
+    field_id.gsub!(/[\[\]]/, '_')
+    field_id.gsub!(/_+/, '_')
+
+    text << " *" if required
+
+    return label(field_id, text.html_safe, :for => field_id)
+  end
+
+  def get_help_text(text)
+    if text
+      @template.content_tag(:span, text.html_safe, :class => "help-inline")
+    else
+      "".html_safe
+    end
+  end
+
+  def make_inputs_inline(input)
+    @template.content_tag(:div, input, :class => 'inline-inputs')
+  end
+
+  def get_final_wrappings(super_input, title, help_text)
+    input = @template.content_tag(:div, super_input + help_text, :class => 'input')
+    return @template.content_tag(:div, (title + input).html_safe, :class => 'clearfix')
   end
 
 end
