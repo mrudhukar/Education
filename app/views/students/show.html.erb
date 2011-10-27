@@ -1,5 +1,100 @@
-<p id="notice"><%= notice %></p>
+<% @title = @student.name %>
+<% @page_action =  {:name => "Edit", :url => edit_student_path(@student)} %>
 
+<div class="clearfix">
+  <div class="span15">
+    <div class="span3">First Name</div>
+    <div class="span11"><%= @student.first_name %></div>
+  </div>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+  <div class="span15">
+    <div class="span3">Surname</div>
+    <div class="span11"><%= @student.surname.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Date of Birth</div>
+    <div class="span11"><%= @student.dob.strftime('%B %d, %Y') %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Gender</div>
+    <div class="span11"><%= @student.gender %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Father name</div>
+    <div class="span11"><%= (@student.father_first_name.presence || "") + " " + (@student.father_surname.presence || "") %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Mother name</div>
+    <div class="span11"><%= (@student.mother_first_name.presence || "") + " " + (@student.mother_surname.presence || "") %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Guardian name</div>
+    <div class="span11"><%= (@student.gaurdian_first_name.presence || "") + " " + (@student.gaurdian_surname.presence || "") %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Caste</div>
+    <div class="span11"><%= @student.caste %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Minority</div>
+    <div class="span11"><%= @student.minority.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Father Income Source</div>
+    <div class="span11"><%= @student.father_income_source.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Father Number</div>
+    <div class="span11"><%= @student.father_number.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Guardian Number</div>
+    <div class="span11"><%= @student.gaurdian_number.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Below Poverty Line</div>
+    <div class="span11"><%= @student.bpl ? "Yes" : "No" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Aadhar UID</div>
+    <div class="span11"><%= @student.aadhar_uid.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Current Address</div>
+    <div class="span11"><%= @student.current_address.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Permanent Address</div>
+    <div class="span11"><%= @student.permanent_address.presence || "-" %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Class</div>
+    <div class="span11"><%= @section_student.section.school_klass.klass.name %></div>
+  </div>
+
+  <div class="span15">
+    <div class="span3">Section</div>
+    <div class="span11"><%= @section_student.section.name %></div>
+  </div>
+</div>
+
+<style>
+  .span15{
+    margin-bottom: 10px;
+}
+</style>

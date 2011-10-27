@@ -6,13 +6,12 @@
         <% if current_school %>
           <ul class="nav">
             <%= render_tab(TabConstants::HOME, root_path) %>
-            <li class="dropdown <%= 'active' %>">
+            <li class="dropdown">
               <%= link_to "Students", "#", :class => "dropdown-toggle" %>
               <ul class="dropdown-menu groups">
                 <li><%= link_to truncate("Test"), "#" %> </li>
               </ul>
             </li>
-            <%= render_tab("States", "#") %>
           </ul>
 
           <ul class="nav secondary-nav">

@@ -4,6 +4,7 @@ class School < ActiveRecord::Base
   end
 
   has_many :school_klasses, :dependent => :destroy
+  has_many :klasses, :through => :school_klasses
   has_many :sections, :through => :school_klasses
   has_many :section_students, :through => :sections
   has_many :students, :through => :section_students
@@ -14,7 +15,7 @@ class School < ActiveRecord::Base
 
   private
 
-  def create_class
+  def create_classes
     Klass.all.each do |klass|
       self.school_klasses.create!(:klass => klass)
     end

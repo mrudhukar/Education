@@ -33,6 +33,19 @@
   <%= f.text_area :current_address, :class => "xxlarge", :rows => 3 %>
   <%= f.text_area :permanent_address, :class => "xxlarge", :rows => 3 %>
 
+  <% if @student.new_record? %>
+    <div class="clearfix">
+      <label>Class</label>
+      <div class="input">
+        <%= select_tag :klass, options_from_collection_for_select(current_school.klasses, 'id', 'name'), "data-url" => new_student_path() %>
+      </div>
+    </div>
+
+
+    <%= f.fields_for :section_students do |s|%>
+      <%= s.select :section_id, [], {:prompt => 'Select..'}, :class => "small" %>
+    <% end %>
+  <% end %>
 
   <%= f.actions do %>
     <%= f.submit "Submit" %>

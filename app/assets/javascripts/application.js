@@ -12,8 +12,7 @@
 //= require bootstrap-modal
 //= require columnizer
 //= require jquery.tablesorter.min
-//= extensions
-//= commonitems
+//= require extensions
 //= require_tree .
 
 function onLoadMethods() {
@@ -25,6 +24,8 @@ function onLoadMethods() {
 
 $(document).ready(function(){
   onLoadMethods();
+  Student.observeChange();
+
   $("table.sortenabled").tablesorter({sortList: [[1,0]]});
 
   $("a.close").live("click", function (){

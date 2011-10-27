@@ -1,22 +1,33 @@
-<% @title = "Students" %>
-<% @page_action = {:name => "Add student", :url => new_student_path()} %>
+<% @title = "#{current_school.name} - Students" %>
+<% @page_action =  {:name => "Add Student", :url => new_student_path()} %>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="zebra-striped sortenabled">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Gender</th>
+      <th>Caste</th>
+      <th>Minority</th>
+      <th>BPL</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @students.each do |student| %>
-  <tr>
-    <td><%= link_to 'Show', student %></td>
-    <td><%= link_to 'Edit', edit_student_path(student) %></td>
-    <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <% @students.each do |student| %>
+    <tr>
+      <td><%= student.name %></td>
+      <td><%= student.dob.strftime('%B %d, %Y') %></td>
+      <td><%= student.gender %></td>
+      <td><%= student.caste %></td>
+      <td><%= student.minority %></td>
+      <td><%= student.bpl ? "Yes" : "No" %></td>
+
+      <td><%= link_to 'Show', student %></td>
+      <td><%= link_to 'Edit', edit_student_path(student) %></td>
+      <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New Student', new_student_path %>

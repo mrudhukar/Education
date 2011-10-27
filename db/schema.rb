@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027111635) do
+ActiveRecord::Schema.define(:version => 20111027112336) do
 
   create_table "klasses", :force => true do |t|
     t.string "name", :null => false
@@ -20,13 +20,13 @@ ActiveRecord::Schema.define(:version => 20111027111635) do
   add_index "klasses", ["name"], :name => "index_klasses_on_name"
 
   create_table "school_klasses", :force => true do |t|
-    t.integer  "school",     :null => false
-    t.integer  "klass",      :null => false
+    t.integer  "school_id",  :null => false
+    t.integer  "klass_id",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "school_klasses", ["school", "klass"], :name => "index_school_klasses_on_school_and_klass"
+  add_index "school_klasses", ["school_id", "klass_id"], :name => "index_school_klasses_on_school_id_and_klass_id"
 
   create_table "schools", :force => true do |t|
     t.string   "name",                               :null => false
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(:version => 20111027111635) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "section_students", :force => true do |t|
+    t.integer  "section_id", :null => false
+    t.integer  "student_id", :null => false
+    t.integer  "start_year"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "section_students", ["section_id", "student_id"], :name => "index_section_students_on_section_id_and_student_id"
 
   create_table "sections", :force => true do |t|
     t.integer  "school_klass_id", :null => false
