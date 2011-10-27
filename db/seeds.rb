@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Klass::NAME.each do |name|
-  klass.create!(:name => name)
+  Klass.create!(:name => name)
 end

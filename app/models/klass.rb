@@ -5,7 +5,7 @@ class Klass < ActiveRecord::Base
     "8th Class", "9th Class", "10th Class", "11th Class", "12th Class"
   ]
 
-  has_many :school_klasses, :dependent_destroy => true
+  has_many :school_klasses, :dependent => :destroy
 
   validates :name, :presence => true, :inclusion => {:in => NAME}, :uniqueness => true
 end

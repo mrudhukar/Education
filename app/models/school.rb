@@ -3,7 +3,7 @@ class School < ActiveRecord::Base
     c.login_field = :code
   end
 
-  has_many :school_klasses, :dependent_destroy => true
+  has_many :school_klasses, :dependent => :destroy
 
   validates :name, :code, :presence => true
 
