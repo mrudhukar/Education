@@ -3,5 +3,17 @@ class School < ActiveRecord::Base
     c.login_field = :code
   end
 
+  has_many :school_klasses, :dependent_destroy => true
+
   validates :name, :code, :presence => true
+
+  after_create :create_classes
+
+  private
+
+  def create_class
+    Klass.all.each do |klass|
+      self.school_klasses.create!(:klass => klass)
+    end
+  end
 end
