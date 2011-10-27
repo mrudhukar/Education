@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <%= f.text_field :Name %>
-  <%= f.text_field :code %>
+  <%= f.text_field :code, :title => "School Code" %>
+  <%= f.text_field :name %>
   <%= f.password_field :password %>
   <%= f.password_field :password_confirmation %>
-  <%= f.text_area :address %>
+  <%= f.text_area :address, :class => "xxlarge", :rows => 3 %>
 
   <%= f.actions do %>
-    <%= f.submit %>
+    <%= f.submit "Submit" %>
     <%= f.cancel_path "Cancel", schools_path %>
   <% end %>
 <% end %>
