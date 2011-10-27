@@ -4,6 +4,9 @@ class School < ActiveRecord::Base
   end
 
   has_many :school_klasses, :dependent => :destroy
+  has_many :sections, :through => :school_klasses
+  has_many :section_students, :through => :sections
+  has_many :students, :through => :section_students
 
   validates :name, :code, :presence => true
 
